@@ -41,6 +41,8 @@ namespace BinaryClockScreenSaver
         private Point mouseLocation;
         private bool previewMode;
         private Random rand = new Random();
+        private int shitfX = 10;
+        private int shitfY = 10;
 
         public ScreenSaverForm()
         {
@@ -51,6 +53,7 @@ namespace BinaryClockScreenSaver
         {
             InitializeComponent();
             this.Bounds = Bounds;
+            binaryClockPanel.Location = new Point(rand.Next(Bounds.Right), rand.Next(Bounds.Bottom));
             updateClock();
         }
 
@@ -114,8 +117,14 @@ namespace BinaryClockScreenSaver
         private void updateClock()
         {
             // Move to new location
-            binaryClockPanel.Left = rand.Next(Math.Max(1, Bounds.Width - binaryClockPanel.Width));
-            binaryClockPanel.Top = rand.Next(Math.Max(1, Bounds.Height - binaryClockPanel.Height));
+            //binaryClockPanel.Left = rand.Next(Math.Max(1, Bounds.Width - binaryClockPanel.Width));
+            //binaryClockPanel.Top = rand.Next(Math.Max(1, Bounds.Height - binaryClockPanel.Height));
+            binaryClockPanel.Left += shitfX;
+            binaryClockPanel.Top += shitfY;
+            if(binaryClockPanel.Right >= Bounds.Width || binaryClockPanel.Left <= 0)
+                shitfX = -shitfX;
+            if(binaryClockPanel.Bottom >= Bounds.Height || binaryClockPanel.Top <= 0)
+                shitfY = -shitfY;
 
             // update display
             var now = DateTime.Now;
