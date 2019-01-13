@@ -87,11 +87,37 @@ namespace BinaryClockScreenSaver
             moveTimer.Start();
         }
 
+        private void setupRow(Label[] labels, int x)
+        {
+            for(int i = 0; i < labels.Length; ++i)
+            {
+                if((x % 2) != 0)
+                {
+                    labels[i].Text = "⚫";
+                    labels[i].ForeColor = Color.Red;
+                }
+                else
+                {
+                    labels[i].Text = "⚫";
+                    labels[i].ForeColor = Color.FromArgb(32, 0, 0);
+                }
+                x /= 2;
+            }
+        }
+
         private void moveTimer_Tick(object sender, System.EventArgs e)
         {
             // Move text to new location
             textLabel.Left = rand.Next(Math.Max(1, Bounds.Width - textLabel.Width));
             textLabel.Top = rand.Next(Math.Max(1, Bounds.Height - textLabel.Height));
+
+            var now = DateTime.Now;
+            var hourLabels = new Label[] { labelH1, labelH2, labelH4, labelH8, labelH16};
+            setupRow(hourLabels, now.Hour);
+            var minuteLabels = new Label[] { labelM1, labelM2, labelM4, labelM8, labelM16, labelM32 };
+            setupRow(minuteLabels, now.Minute);
+            var secondLabels = new Label[] { labelS1, labelS2, labelS4, labelS8, labelS16, labelS32 };
+            setupRow(secondLabels, now.Second);
         }
 
         private void LoadSettings()
