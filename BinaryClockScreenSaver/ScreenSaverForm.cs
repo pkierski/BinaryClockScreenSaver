@@ -51,6 +51,7 @@ namespace BinaryClockScreenSaver
         {
             InitializeComponent();
             this.Bounds = Bounds;
+            updateClock();
         }
 
         public ScreenSaverForm(IntPtr PreviewWndHandle)
@@ -70,7 +71,7 @@ namespace BinaryClockScreenSaver
             Location = new Point(0, 0);
 
             // Make text smaller
-            textLabel.Font = new System.Drawing.Font("Arial", 6);
+            // textLabel.Font = new System.Drawing.Font("Arial", 6);
 
             previewMode = true;
         }
@@ -107,12 +108,18 @@ namespace BinaryClockScreenSaver
 
         private void moveTimer_Tick(object sender, System.EventArgs e)
         {
-            // Move text to new location
-            textLabel.Left = rand.Next(Math.Max(1, Bounds.Width - textLabel.Width));
-            textLabel.Top = rand.Next(Math.Max(1, Bounds.Height - textLabel.Height));
+            updateClock();
+        }
 
+        private void updateClock()
+        {
+            // Move to new location
+            binaryClockPanel.Left = rand.Next(Math.Max(1, Bounds.Width - binaryClockPanel.Width));
+            binaryClockPanel.Top = rand.Next(Math.Max(1, Bounds.Height - binaryClockPanel.Height));
+
+            // update display
             var now = DateTime.Now;
-            var hourLabels = new Label[] { labelH1, labelH2, labelH4, labelH8, labelH16};
+            var hourLabels = new Label[] { labelH1, labelH2, labelH4, labelH8, labelH16 };
             setupRow(hourLabels, now.Hour);
             var minuteLabels = new Label[] { labelM1, labelM2, labelM4, labelM8, labelM16, labelM32 };
             setupRow(minuteLabels, now.Minute);
@@ -124,10 +131,10 @@ namespace BinaryClockScreenSaver
         {
             // Use the string from the Registry if it exists
             var key = Registry.CurrentUser.OpenSubKey("SOFTWARE\\Demo_ScreenSaver");
-            if(key == null)
-                textLabel.Text = "C# Screen Saver";
-            else
-                textLabel.Text = (string)key.GetValue("text");
+            //if(key == null)
+            //    textLabel.Text = "C# Screen Saver";
+            //else
+            //    textLabel.Text = (string)key.GetValue("text");
         }
 
         private void ScreenSaverForm_MouseMove(object sender, MouseEventArgs e)

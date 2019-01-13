@@ -29,9 +29,8 @@
         private void InitializeComponent()
         {
             this.components = new System.ComponentModel.Container();
-            this.textLabel = new System.Windows.Forms.Label();
             this.moveTimer = new System.Windows.Forms.Timer(this.components);
-            this.tableLayoutPanel1 = new System.Windows.Forms.TableLayoutPanel();
+            this.binaryClockPanel = new System.Windows.Forms.TableLayoutPanel();
             this.labelS32 = new System.Windows.Forms.Label();
             this.labelS16 = new System.Windows.Forms.Label();
             this.labelS4 = new System.Windows.Forms.Label();
@@ -49,56 +48,45 @@
             this.labelH8 = new System.Windows.Forms.Label();
             this.labelH16 = new System.Windows.Forms.Label();
             this.labelM32 = new System.Windows.Forms.Label();
-            this.tableLayoutPanel1.SuspendLayout();
+            this.binaryClockPanel.SuspendLayout();
             this.SuspendLayout();
             // 
-            // textLabel
+            // binaryClockPanel
             // 
-            this.textLabel.AutoSize = true;
-            this.textLabel.Font = new System.Drawing.Font("Arial", 36F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.textLabel.ForeColor = System.Drawing.Color.Red;
-            this.textLabel.Location = new System.Drawing.Point(25, 58);
-            this.textLabel.Name = "textLabel";
-            this.textLabel.Size = new System.Drawing.Size(466, 55);
-            this.textLabel.TabIndex = 0;
-            this.textLabel.Text = "Hello, Screen Saver!";
-            // 
-            // tableLayoutPanel1
-            // 
-            this.tableLayoutPanel1.ColumnCount = 6;
-            this.tableLayoutPanel1.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Percent, 16.66667F));
-            this.tableLayoutPanel1.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Percent, 16.66667F));
-            this.tableLayoutPanel1.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Percent, 16.66667F));
-            this.tableLayoutPanel1.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Percent, 16.66667F));
-            this.tableLayoutPanel1.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Percent, 16.66667F));
-            this.tableLayoutPanel1.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Percent, 16.66667F));
-            this.tableLayoutPanel1.Controls.Add(this.labelS32, 0, 2);
-            this.tableLayoutPanel1.Controls.Add(this.labelS16, 1, 2);
-            this.tableLayoutPanel1.Controls.Add(this.labelS4, 1, 2);
-            this.tableLayoutPanel1.Controls.Add(this.labelS1, 1, 2);
-            this.tableLayoutPanel1.Controls.Add(this.labelS8, 1, 2);
-            this.tableLayoutPanel1.Controls.Add(this.labelS2, 1, 2);
-            this.tableLayoutPanel1.Controls.Add(this.labelM1, 5, 1);
-            this.tableLayoutPanel1.Controls.Add(this.labelM2, 4, 1);
-            this.tableLayoutPanel1.Controls.Add(this.labelM4, 3, 1);
-            this.tableLayoutPanel1.Controls.Add(this.labelM8, 2, 1);
-            this.tableLayoutPanel1.Controls.Add(this.labelM16, 1, 1);
-            this.tableLayoutPanel1.Controls.Add(this.labelH1, 5, 0);
-            this.tableLayoutPanel1.Controls.Add(this.labelH2, 4, 0);
-            this.tableLayoutPanel1.Controls.Add(this.labelH4, 3, 0);
-            this.tableLayoutPanel1.Controls.Add(this.labelH8, 2, 0);
-            this.tableLayoutPanel1.Controls.Add(this.labelH16, 1, 0);
-            this.tableLayoutPanel1.Controls.Add(this.labelM32, 0, 1);
-            this.tableLayoutPanel1.Font = new System.Drawing.Font("Consolas", 8.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(238)));
-            this.tableLayoutPanel1.Location = new System.Drawing.Point(138, 154);
-            this.tableLayoutPanel1.Name = "tableLayoutPanel1";
-            this.tableLayoutPanel1.RowCount = 3;
-            this.tableLayoutPanel1.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Percent, 33.33333F));
-            this.tableLayoutPanel1.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Percent, 33.33333F));
-            this.tableLayoutPanel1.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Percent, 33.33333F));
-            this.tableLayoutPanel1.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Absolute, 20F));
-            this.tableLayoutPanel1.Size = new System.Drawing.Size(353, 213);
-            this.tableLayoutPanel1.TabIndex = 1;
+            this.binaryClockPanel.ColumnCount = 6;
+            this.binaryClockPanel.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Percent, 16.66667F));
+            this.binaryClockPanel.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Percent, 16.66667F));
+            this.binaryClockPanel.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Percent, 16.66667F));
+            this.binaryClockPanel.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Percent, 16.66667F));
+            this.binaryClockPanel.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Percent, 16.66667F));
+            this.binaryClockPanel.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Percent, 16.66667F));
+            this.binaryClockPanel.Controls.Add(this.labelS32, 0, 2);
+            this.binaryClockPanel.Controls.Add(this.labelS16, 1, 2);
+            this.binaryClockPanel.Controls.Add(this.labelS4, 1, 2);
+            this.binaryClockPanel.Controls.Add(this.labelS1, 1, 2);
+            this.binaryClockPanel.Controls.Add(this.labelS8, 1, 2);
+            this.binaryClockPanel.Controls.Add(this.labelS2, 1, 2);
+            this.binaryClockPanel.Controls.Add(this.labelM1, 5, 1);
+            this.binaryClockPanel.Controls.Add(this.labelM2, 4, 1);
+            this.binaryClockPanel.Controls.Add(this.labelM4, 3, 1);
+            this.binaryClockPanel.Controls.Add(this.labelM8, 2, 1);
+            this.binaryClockPanel.Controls.Add(this.labelM16, 1, 1);
+            this.binaryClockPanel.Controls.Add(this.labelH1, 5, 0);
+            this.binaryClockPanel.Controls.Add(this.labelH2, 4, 0);
+            this.binaryClockPanel.Controls.Add(this.labelH4, 3, 0);
+            this.binaryClockPanel.Controls.Add(this.labelH8, 2, 0);
+            this.binaryClockPanel.Controls.Add(this.labelH16, 1, 0);
+            this.binaryClockPanel.Controls.Add(this.labelM32, 0, 1);
+            this.binaryClockPanel.Font = new System.Drawing.Font("Consolas", 8.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(238)));
+            this.binaryClockPanel.Location = new System.Drawing.Point(138, 154);
+            this.binaryClockPanel.Name = "binaryClockPanel";
+            this.binaryClockPanel.RowCount = 3;
+            this.binaryClockPanel.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Percent, 33.33333F));
+            this.binaryClockPanel.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Percent, 33.33333F));
+            this.binaryClockPanel.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Percent, 33.33333F));
+            this.binaryClockPanel.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Absolute, 20F));
+            this.binaryClockPanel.Size = new System.Drawing.Size(353, 213);
+            this.binaryClockPanel.TabIndex = 1;
             // 
             // labelS32
             // 
@@ -361,8 +349,7 @@
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.BackColor = System.Drawing.Color.Black;
             this.ClientSize = new System.Drawing.Size(708, 429);
-            this.Controls.Add(this.tableLayoutPanel1);
-            this.Controls.Add(this.textLabel);
+            this.Controls.Add(this.binaryClockPanel);
             this.FormBorderStyle = System.Windows.Forms.FormBorderStyle.None;
             this.Name = "ScreenSaverForm";
             this.StartPosition = System.Windows.Forms.FormStartPosition.Manual;
@@ -371,18 +358,15 @@
             this.KeyPress += new System.Windows.Forms.KeyPressEventHandler(this.ScreenSaverForm_KeyPress);
             this.MouseClick += new System.Windows.Forms.MouseEventHandler(this.ScreenSaverForm_MouseClick);
             this.MouseMove += new System.Windows.Forms.MouseEventHandler(this.ScreenSaverForm_MouseMove);
-            this.tableLayoutPanel1.ResumeLayout(false);
-            this.tableLayoutPanel1.PerformLayout();
+            this.binaryClockPanel.ResumeLayout(false);
+            this.binaryClockPanel.PerformLayout();
             this.ResumeLayout(false);
-            this.PerformLayout();
 
         }
 
         #endregion
-
-        private System.Windows.Forms.Label textLabel;
         private System.Windows.Forms.Timer moveTimer;
-        private System.Windows.Forms.TableLayoutPanel tableLayoutPanel1;
+        private System.Windows.Forms.TableLayoutPanel binaryClockPanel;
         private System.Windows.Forms.Label labelH16;
         private System.Windows.Forms.Label labelH1;
         private System.Windows.Forms.Label labelH2;
