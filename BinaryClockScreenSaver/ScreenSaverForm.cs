@@ -44,6 +44,8 @@ namespace BinaryClockScreenSaver
         private int shitfX = 10;
         private int shitfY = 10;
 
+        private BinaryClockDrawer drawer = new BinaryClockDrawer();
+
         public ScreenSaverForm()
         {
             InitializeComponent();
@@ -103,7 +105,7 @@ namespace BinaryClockScreenSaver
                 else
                 {
                     labels[i].Text = "⚫";
-                    labels[i].ForeColor = Color.FromArgb(32, 0, 0);
+                    labels[i].ForeColor = Color.FromArgb(32, 16, 16);
                 }
                 x /= 2;
             }
@@ -116,15 +118,27 @@ namespace BinaryClockScreenSaver
 
         private void updateClock()
         {
+            var bitmap = new Bitmap(300, 150);
+            var bitmapGr = Graphics.FromImage(bitmap);
+            bitmapGr.InterpolationMode = System.Drawing.Drawing2D.InterpolationMode.High;
+            bitmapGr.SmoothingMode = System.Drawing.Drawing2D.SmoothingMode.AntiAlias;
+            drawer.Draw(bitmapGr, DateTime.Now);
+
+            var gr = this.CreateGraphics();
+            gr.SmoothingMode = System.Drawing.Drawing2D.SmoothingMode.AntiAlias;
+            gr.InterpolationMode = System.Drawing.Drawing2D.InterpolationMode.HighQualityBicubic;
+            gr.DrawImage(bitmap, new Point(10, 20));
+            gr.Dispose();
+
             // Move to new location
             //binaryClockPanel.Left = rand.Next(Math.Max(1, Bounds.Width - binaryClockPanel.Width));
             //binaryClockPanel.Top = rand.Next(Math.Max(1, Bounds.Height - binaryClockPanel.Height));
+            if(binaryClockPanel.Right + shitfX >= Bounds.Width || binaryClockPanel.Left + shitfX <= 0)
+                shitfX = -shitfX;
+            if(binaryClockPanel.Bottom + shitfY >= Bounds.Height || binaryClockPanel.Top + shitfY <= 0)
+                shitfY = -shitfY;
             binaryClockPanel.Left += shitfX;
             binaryClockPanel.Top += shitfY;
-            if(binaryClockPanel.Right >= Bounds.Width || binaryClockPanel.Left <= 0)
-                shitfX = -shitfX;
-            if(binaryClockPanel.Bottom >= Bounds.Height || binaryClockPanel.Top <= 0)
-                shitfY = -shitfY;
 
             // update display
             var now = DateTime.Now;
