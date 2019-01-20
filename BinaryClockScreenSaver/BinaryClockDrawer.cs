@@ -16,17 +16,25 @@ namespace BinaryClockScreenSaver
         public Color BackgroundColor = Color.FromArgb(20, 20, 20);
         public bool DrawSeconds = true;
         public PointF Location = new PointF(0, 0);
-        public RectangleF Size
+        public SizeF SizeF
         {
             get
             {
-                return new RectangleF(Location, new SizeF(6 * CellSize, (DrawSeconds ? 3 : 2) * CellSize));
+                return new SizeF(6 * CellSize, (DrawSeconds ? 3 : 2) * CellSize);
+            }
+        }
+
+        public Size Size
+        {
+            get
+            {
+                return SizeF.ToSize();
             }
         }
 
         public void Draw(Graphics graphics, DateTime time)
         {
-            graphics.FillRectangle(new SolidBrush(BackgroundColor), Size);
+            graphics.FillRectangle(new SolidBrush(BackgroundColor), new RectangleF(Location, SizeF));
 
             var hour = time.Hour;
             drawCell(graphics, 1, 0, (hour & 16) != 0);

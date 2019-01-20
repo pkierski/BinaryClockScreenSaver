@@ -52,6 +52,8 @@ namespace BinaryClockScreenSaver
         public ScreenSaverForm(Rectangle Bounds)
         {
             InitializeComponent();
+            this.DoubleBuffered = true;
+            drawer.CellSize = Math.Min(Bounds.Height, Bounds.Width) / 15.0f;
             this.Bounds = Bounds;
             updateClock();
         }
@@ -59,6 +61,7 @@ namespace BinaryClockScreenSaver
         public ScreenSaverForm(IntPtr PreviewWndHandle)
         {
             InitializeComponent();
+            this.DoubleBuffered = true;
 
             // Set the preview window as the parent of this window
             SetParent(this.Handle, PreviewWndHandle);
@@ -72,6 +75,7 @@ namespace BinaryClockScreenSaver
             Size = ParentRect.Size;
             Location = new Point(0, 0);
 
+            drawer.CellSize = Math.Min(Bounds.Height, Bounds.Width) / 15.0f;
             // Make text smaller
             // textLabel.Font = new System.Drawing.Font("Arial", 6);
 
@@ -90,24 +94,6 @@ namespace BinaryClockScreenSaver
             moveTimer.Start();
         }
 
-        private void setupRow(Label[] labels, int x)
-        {
-            for(int i = 0; i < labels.Length; ++i)
-            {
-                if((x % 2) != 0)
-                {
-                    labels[i].Text = "⚫";
-                    labels[i].ForeColor = Color.Red;
-                }
-                else
-                {
-                    labels[i].Text = "⚫";
-                    labels[i].ForeColor = Color.FromArgb(32, 16, 16);
-                }
-                x /= 2;
-            }
-        }
-
         private void moveTimer_Tick(object sender, System.EventArgs e)
         {
             updateClock();
@@ -115,17 +101,7 @@ namespace BinaryClockScreenSaver
 
         private void updateClock()
         {
-            var bitmap = new Bitmap(300, 150);
-            var bitmapGr = Graphics.FromImage(bitmap);
-            bitmapGr.InterpolationMode = System.Drawing.Drawing2D.InterpolationMode.High;
-            bitmapGr.SmoothingMode = System.Drawing.Drawing2D.SmoothingMode.AntiAlias;
-            drawer.Draw(bitmapGr, DateTime.Now);
-
-            var gr = this.CreateGraphics();
-            gr.SmoothingMode = System.Drawing.Drawing2D.SmoothingMode.AntiAlias;
-            gr.InterpolationMode = System.Drawing.Drawing2D.InterpolationMode.HighQualityBicubic;
-            gr.DrawImage(bitmap, new Point(10, 20));
-            gr.Dispose();
+            this.Invalidate();
         }
 
         private void LoadSettings()
@@ -165,6 +141,20 @@ namespace BinaryClockScreenSaver
         {
             if(!previewMode)
                 Application.Exit();
+        }
+
+        private void ScreenSaverForm_Paint(object sender, PaintEventArgs e)
+        {
+            var panelSize = drawer.Size;
+            var bitmap = new Bitmap(panelSize.Width + 1, panelSize.Height + 1);
+            var bitmapGr = Graphics.FromImage(bitmap);
+            bitmapGr.InterpolationMode = System.Drawing.Drawing2D.InterpolationMode.High;
+            bitmapGr.SmoothingMode = System.Drawing.Drawing2D.SmoothingMode.AntiAlias;
+            drawer.Draw(bitmapGr, DateTime.Now);
+
+            e.Graphics.SmoothingMode = System.Drawing.Drawing2D.SmoothingMode.AntiAlias;
+            e.Graphics.InterpolationMode = System.Drawing.Drawing2D.InterpolationMode.HighQualityBicubic;
+            e.Graphics.DrawImage(bitmap, new Point(10, 20));
         }
     }
 }
