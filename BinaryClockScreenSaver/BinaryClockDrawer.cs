@@ -9,11 +9,55 @@ namespace BinaryClockScreenSaver
 {
     class BinaryClockDrawer
     {
+        public BinaryClockDrawer()
+        {
+            InactiveColor = Color.FromArgb(48, 16, 16);
+            ActiveColor = Color.Red;
+            BackgroundColor = Color.FromArgb(20, 20, 20);
+        }
+
         public float CellSize = 50.0f;
         public float LampFill = 0.75f;
-        public Color ActiveColor = Color.Red;
-        public Color InactiveColor = Color.FromArgb(48, 16, 16);
-        public Color BackgroundColor = Color.FromArgb(20, 20, 20);
+
+        public Color ActiveColor
+        {
+            get
+            {
+                return activeColorBrush.Color;
+            }
+            set
+            {
+                activeColorBrush = new SolidBrush(value);
+            }
+        }
+        private SolidBrush activeColorBrush = null;
+
+        public Color InactiveColor
+        {
+            get
+            {
+                return inactiveColorBrush.Color;
+            }
+            set
+            {
+                inactiveColorBrush = new SolidBrush(value);
+            }
+        }
+        private SolidBrush inactiveColorBrush = null;
+
+        public Color BackgroundColor
+        {
+            get
+            {
+                return backgroundColorBrush.Color;
+            }
+            set
+            {
+                backgroundColorBrush = new SolidBrush(value);
+            }
+        }
+        private SolidBrush backgroundColorBrush = null;
+
         public bool DrawSeconds = true;
         public PointF Location = new PointF(0, 0);
         public SizeF SizeF
@@ -34,7 +78,7 @@ namespace BinaryClockScreenSaver
 
         public void Draw(Graphics graphics, DateTime time)
         {
-            graphics.FillRectangle(new SolidBrush(BackgroundColor), new RectangleF(Location, SizeF));
+            graphics.FillRectangle(backgroundColorBrush, new RectangleF(Location, SizeF));
 
             var hour = time.Hour;
             drawCell(graphics, 1, 0, (hour & 16) != 0);
@@ -67,9 +111,9 @@ namespace BinaryClockScreenSaver
         {
             var left = x * CellSize + CellSize * (1 - LampFill) / 2;
             var top = y * CellSize + CellSize * (1 - LampFill) / 2;
-            var ellipseRect = new RectangleF(new PointF(left, top), new SizeF(CellSize * LampFill, CellSize* LampFill));
+            var ellipseRect = new RectangleF(new PointF(left, top), new SizeF(CellSize * LampFill, CellSize * LampFill));
             ellipseRect.Offset(Location);
-            graphics.FillEllipse(new SolidBrush(active ? ActiveColor : InactiveColor), ellipseRect);
+            graphics.FillEllipse(active ? activeColorBrush : inactiveColorBrush, ellipseRect);
         }
     }
 }
