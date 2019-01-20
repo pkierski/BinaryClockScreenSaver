@@ -41,8 +41,6 @@ namespace BinaryClockScreenSaver
         private Point mouseLocation;
         private bool previewMode;
         private Random rand = new Random();
-        private int shitfX = 10;
-        private int shitfY = 10;
 
         private BinaryClockDrawer drawer = new BinaryClockDrawer();
 
@@ -55,7 +53,6 @@ namespace BinaryClockScreenSaver
         {
             InitializeComponent();
             this.Bounds = Bounds;
-            binaryClockPanel.Location = new Point(rand.Next(Bounds.Right), rand.Next(Bounds.Bottom));
             updateClock();
         }
 
@@ -129,25 +126,6 @@ namespace BinaryClockScreenSaver
             gr.InterpolationMode = System.Drawing.Drawing2D.InterpolationMode.HighQualityBicubic;
             gr.DrawImage(bitmap, new Point(10, 20));
             gr.Dispose();
-
-            // Move to new location
-            //binaryClockPanel.Left = rand.Next(Math.Max(1, Bounds.Width - binaryClockPanel.Width));
-            //binaryClockPanel.Top = rand.Next(Math.Max(1, Bounds.Height - binaryClockPanel.Height));
-            if(binaryClockPanel.Right + shitfX >= Bounds.Width || binaryClockPanel.Left + shitfX <= 0)
-                shitfX = -shitfX;
-            if(binaryClockPanel.Bottom + shitfY >= Bounds.Height || binaryClockPanel.Top + shitfY <= 0)
-                shitfY = -shitfY;
-            binaryClockPanel.Left += shitfX;
-            binaryClockPanel.Top += shitfY;
-
-            // update display
-            var now = DateTime.Now;
-            var hourLabels = new Label[] { labelH1, labelH2, labelH4, labelH8, labelH16 };
-            setupRow(hourLabels, now.Hour);
-            var minuteLabels = new Label[] { labelM1, labelM2, labelM4, labelM8, labelM16, labelM32 };
-            setupRow(minuteLabels, now.Minute);
-            var secondLabels = new Label[] { labelS1, labelS2, labelS4, labelS8, labelS16, labelS32 };
-            setupRow(secondLabels, now.Second);
         }
 
         private void LoadSettings()

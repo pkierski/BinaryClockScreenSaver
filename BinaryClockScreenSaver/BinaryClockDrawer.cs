@@ -10,17 +10,23 @@ namespace BinaryClockScreenSaver
     class BinaryClockDrawer
     {
         public float CellSize = 50.0f;
-        public float LampFill = 0.8f;
+        public float LampFill = 0.75f;
         public Color ActiveColor = Color.Red;
-        public Color InactiveColor = Color.FromArgb(32, 16, 16);
-        public Color BackgroundColor = Color.FromArgb(30, 30, 30);
+        public Color InactiveColor = Color.FromArgb(48, 16, 16);
+        public Color BackgroundColor = Color.FromArgb(20, 20, 20);
         public bool DrawSeconds = true;
         public PointF Location = new PointF(0, 0);
+        public RectangleF Size
+        {
+            get
+            {
+                return new RectangleF(Location, new SizeF(6 * CellSize, (DrawSeconds ? 3 : 2) * CellSize));
+            }
+        }
 
         public void Draw(Graphics graphics, DateTime time)
         {
-            var backgroundRect = new RectangleF(Location, new SizeF(6 * CellSize, (DrawSeconds ? 3 : 2) * CellSize));
-            graphics.FillRectangle(new SolidBrush(BackgroundColor), backgroundRect);
+            graphics.FillRectangle(new SolidBrush(BackgroundColor), Size);
 
             var hour = time.Hour;
             drawCell(graphics, 1, 0, (hour & 16) != 0);
