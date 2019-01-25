@@ -60,5 +60,21 @@ namespace BinaryClockScreenSaver
         {
             Close();
         }
+
+        private static Color getContrast(Color c)
+        {
+            var brightness = c.G * 0.59 + c.R * 0.3 + c.B * 0.11;
+            return brightness > 128 ? Color.Black : Color.White;
+        }
+
+        private void buttonActiveColor_Click(object sender, EventArgs e)
+        {
+            colorDialog.Color = Color.Black;
+            if(colorDialog.ShowDialog() == DialogResult.OK)
+            {
+                buttonActiveColor.ForeColor = getContrast(colorDialog.Color);
+                buttonActiveColor.BackColor = colorDialog.Color;
+            }
+        }
     }
 }

@@ -34,6 +34,8 @@
             this.label3 = new System.Windows.Forms.Label();
             this.okButton = new System.Windows.Forms.Button();
             this.cancelButton = new System.Windows.Forms.Button();
+            this.colorDialog = new System.Windows.Forms.ColorDialog();
+            this.buttonActiveColor = new System.Windows.Forms.Button();
             this.SuspendLayout();
             // 
             // textBox
@@ -95,11 +97,23 @@
             this.cancelButton.UseVisualStyleBackColor = true;
             this.cancelButton.Click += new System.EventHandler(this.cancelButton_Click);
             // 
+            // buttonActiveColor
+            // 
+            this.buttonActiveColor.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
+            this.buttonActiveColor.Location = new System.Drawing.Point(135, 77);
+            this.buttonActiveColor.Name = "buttonActiveColor";
+            this.buttonActiveColor.Size = new System.Drawing.Size(75, 23);
+            this.buttonActiveColor.TabIndex = 6;
+            this.buttonActiveColor.Text = "active color";
+            this.buttonActiveColor.UseVisualStyleBackColor = true;
+            this.buttonActiveColor.Click += new System.EventHandler(this.buttonActiveColor_Click);
+            // 
             // SettingsForm
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.ClientSize = new System.Drawing.Size(235, 194);
+            this.Controls.Add(this.buttonActiveColor);
             this.Controls.Add(this.cancelButton);
             this.Controls.Add(this.okButton);
             this.Controls.Add(this.label3);
@@ -123,5 +137,7 @@
         private System.Windows.Forms.Label label3;
         private System.Windows.Forms.Button okButton;
         private System.Windows.Forms.Button cancelButton;
+        private System.Windows.Forms.ColorDialog colorDialog;
+        private System.Windows.Forms.Button buttonActiveColor;
     }
 }
