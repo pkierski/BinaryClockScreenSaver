@@ -53,8 +53,8 @@ namespace BinaryClockScreenSaver
         {
             InitializeComponent();
             this.DoubleBuffered = true;
-            drawer.CellSize = Math.Min(Bounds.Height, Bounds.Width) / 15.0f;
             this.Bounds = Bounds;
+            setupDrawer();
             updateClock();
         }
 
@@ -75,11 +75,23 @@ namespace BinaryClockScreenSaver
             Size = ParentRect.Size;
             Location = new Point(0, 0);
 
-            drawer.CellSize = Math.Min(Bounds.Height, Bounds.Width) / 15.0f;
-            // Make text smaller
-            // textLabel.Font = new System.Drawing.Font("Arial", 6);
+            setupDrawer();
 
             previewMode = true;
+        }
+
+        private void setupDrawer()
+        {
+            drawer.CellSize = Math.Min(Bounds.Height, Bounds.Width) / 15.0f;
+            drawer.BackgroundColor = Color.Black;
+            lissajous.Height = Bounds.Height - drawer.Size.Height;
+            lissajous.Width = Bounds.Width - drawer.Size.Width;
+
+            var panelSize = drawer.Size;
+            bitmap = new Bitmap(panelSize.Width + 1, panelSize.Height + 1);
+            bitmapGr = Graphics.FromImage(bitmap);
+            bitmapGr.InterpolationMode = System.Drawing.Drawing2D.InterpolationMode.High;
+            bitmapGr.SmoothingMode = System.Drawing.Drawing2D.SmoothingMode.AntiAlias;
         }
 
         private void ScreenSaverForm_Load(object sender, EventArgs e)
@@ -89,7 +101,7 @@ namespace BinaryClockScreenSaver
             Cursor.Hide();
             TopMost = true;
 
-            moveTimer.Interval = 1000;
+            moveTimer.Interval = 100;
             moveTimer.Tick += moveTimer_Tick;
             moveTimer.Start();
         }
@@ -101,6 +113,7 @@ namespace BinaryClockScreenSaver
 
         private void updateClock()
         {
+            k = k + 1.0 / 5000;
             this.Invalidate();
         }
 
@@ -131,7 +144,7 @@ namespace BinaryClockScreenSaver
             }
         }
 
-        private void ScreenSaverForm_KeyPress(object sender, KeyPressEventArgs e)
+        private void ScreenSaverForm_KeyDown(object sender, KeyEventArgs e)
         {
             if(!previewMode)
                 Application.Exit();
@@ -143,18 +156,56 @@ namespace BinaryClockScreenSaver
                 Application.Exit();
         }
 
+        private class Lissajous
+        {
+            public double A {get; set;}
+            public double B {get; set;}
+            public double Period {get; set;}
+            public double Width {get; set;}
+            public double Height {get; set;}
+
+            public double GetX(double k)
+            {
+                return (Math.Sin(A * 2 * Math.PI * (k / Period)) + 1) / 2 * Width;
+            }
+
+            public double GetY(double k)
+            {
+                return (Math.Cos(B * 2 * Math.PI * (k / Period)) + 1) / 2 * Height;
+            }
+
+            public Lissajous(double a, double b, double period, double width, double height)
+            {
+                A = a;
+                B = b;
+                Period = period;
+                Width = width;
+                Height = height;
+            }
+
+            public Lissajous() : this(3, 2.1, 1, 100, 100)
+            {
+            }
+        }
+
+        Lissajous lissajous = new Lissajous();
+        double k = new Random().NextDouble() * 1000;
+        DateTime lastDrawed = DateTime.MinValue;
+
+        Bitmap bitmap = null;
+        Graphics bitmapGr = null;
+
         private void ScreenSaverForm_Paint(object sender, PaintEventArgs e)
         {
-            var panelSize = drawer.Size;
-            var bitmap = new Bitmap(panelSize.Width + 1, panelSize.Height + 1);
-            var bitmapGr = Graphics.FromImage(bitmap);
-            bitmapGr.InterpolationMode = System.Drawing.Drawing2D.InterpolationMode.High;
-            bitmapGr.SmoothingMode = System.Drawing.Drawing2D.SmoothingMode.AntiAlias;
-            drawer.Draw(bitmapGr, DateTime.Now);
-
+            var now = DateTime.Now;
+            if(lastDrawed != now)
+            {
+                drawer.Draw(bitmapGr, now);
+                lastDrawed = now;
+            }
             e.Graphics.SmoothingMode = System.Drawing.Drawing2D.SmoothingMode.AntiAlias;
             e.Graphics.InterpolationMode = System.Drawing.Drawing2D.InterpolationMode.HighQualityBicubic;
-            e.Graphics.DrawImage(bitmap, new Point(10, 20));
+            e.Graphics.DrawImage(bitmap, (float)lissajous.GetX(k), (float)lissajous.GetY(k));
         }
     }
 }

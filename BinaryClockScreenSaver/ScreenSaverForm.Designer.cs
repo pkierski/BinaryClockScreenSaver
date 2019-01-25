@@ -44,7 +44,7 @@
             this.Text = "Form1";
             this.Load += new System.EventHandler(this.ScreenSaverForm_Load);
             this.Paint += new System.Windows.Forms.PaintEventHandler(this.ScreenSaverForm_Paint);
-            this.KeyPress += new System.Windows.Forms.KeyPressEventHandler(this.ScreenSaverForm_KeyPress);
+            this.KeyDown += new System.Windows.Forms.KeyEventHandler(this.ScreenSaverForm_KeyDown);
             this.MouseClick += new System.Windows.Forms.MouseEventHandler(this.ScreenSaverForm_MouseClick);
             this.MouseMove += new System.Windows.Forms.MouseEventHandler(this.ScreenSaverForm_MouseMove);
             this.ResumeLayout(false);
