@@ -67,14 +67,15 @@ namespace BinaryClockScreenSaver
             return brightness > 128 ? Color.Black : Color.White;
         }
 
-        private void buttonActiveColor_Click(object sender, EventArgs e)
+        private void buttonColor_Click(object sender, EventArgs e)
         {
-            colorDialog.Color = Color.Black;
+            var button = sender as ColorPickerButton;
+            if(button == null)
+                return;
+
+            colorDialog.Color = button.Color;
             if(colorDialog.ShowDialog() == DialogResult.OK)
-            {
-                buttonActiveColor.ForeColor = getContrast(colorDialog.Color);
-                buttonActiveColor.BackColor = colorDialog.Color;
-            }
+                button.Color = colorDialog.Color;
         }
     }
 }

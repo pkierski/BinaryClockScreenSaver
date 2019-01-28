@@ -46,6 +46,12 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="BinaryClockDrawer.cs" />
+    <Compile Include="ColorPickerButton.cs">
+      <SubType>Component</SubType>
+    </Compile>
+    <Compile Include="ColorPickerButton.Designer.cs">
+      <DependentUpon>ColorPickerButton.cs</DependentUpon>
+    </Compile>
     <Compile Include="SettingsForm.cs">
       <SubType>Form</SubType>
     </Compile>

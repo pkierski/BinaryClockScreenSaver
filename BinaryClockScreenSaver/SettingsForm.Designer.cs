@@ -35,12 +35,12 @@
             this.okButton = new System.Windows.Forms.Button();
             this.cancelButton = new System.Windows.Forms.Button();
             this.colorDialog = new System.Windows.Forms.ColorDialog();
-            this.buttonActiveColor = new System.Windows.Forms.Button();
+            this.buttonActiveColor = new BinaryClockScreenSaver.ColorPickerButton();
             this.SuspendLayout();
             // 
             // textBox
             // 
-            this.textBox.Location = new System.Drawing.Point(20, 113);
+            this.textBox.Location = new System.Drawing.Point(16, 152);
             this.textBox.Name = "textBox";
             this.textBox.Size = new System.Drawing.Size(190, 20);
             this.textBox.TabIndex = 0;
@@ -68,7 +68,7 @@
             // label3
             // 
             this.label3.AutoSize = true;
-            this.label3.Location = new System.Drawing.Point(21, 97);
+            this.label3.Location = new System.Drawing.Point(17, 136);
             this.label3.Name = "label3";
             this.label3.Size = new System.Drawing.Size(78, 13);
             this.label3.TabIndex = 3;
@@ -77,7 +77,7 @@
             // okButton
             // 
             this.okButton.DialogResult = System.Windows.Forms.DialogResult.OK;
-            this.okButton.Location = new System.Drawing.Point(24, 156);
+            this.okButton.Location = new System.Drawing.Point(20, 195);
             this.okButton.Name = "okButton";
             this.okButton.Size = new System.Drawing.Size(75, 23);
             this.okButton.TabIndex = 4;
@@ -89,7 +89,7 @@
             // 
             this.cancelButton.CausesValidation = false;
             this.cancelButton.DialogResult = System.Windows.Forms.DialogResult.Cancel;
-            this.cancelButton.Location = new System.Drawing.Point(135, 156);
+            this.cancelButton.Location = new System.Drawing.Point(131, 195);
             this.cancelButton.Name = "cancelButton";
             this.cancelButton.Size = new System.Drawing.Size(75, 23);
             this.cancelButton.TabIndex = 5;
@@ -99,20 +99,23 @@
             // 
             // buttonActiveColor
             // 
+            this.buttonActiveColor.BackColor = System.Drawing.SystemColors.Control;
+            this.buttonActiveColor.Color = System.Drawing.SystemColors.Control;
             this.buttonActiveColor.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
-            this.buttonActiveColor.Location = new System.Drawing.Point(135, 77);
+            this.buttonActiveColor.ForeColor = System.Drawing.Color.Black;
+            this.buttonActiveColor.Location = new System.Drawing.Point(24, 77);
             this.buttonActiveColor.Name = "buttonActiveColor";
-            this.buttonActiveColor.Size = new System.Drawing.Size(75, 23);
-            this.buttonActiveColor.TabIndex = 6;
-            this.buttonActiveColor.Text = "active color";
+            this.buttonActiveColor.Size = new System.Drawing.Size(123, 23);
+            this.buttonActiveColor.TabIndex = 7;
+            this.buttonActiveColor.Text = "Active color";
             this.buttonActiveColor.UseVisualStyleBackColor = true;
-            this.buttonActiveColor.Click += new System.EventHandler(this.buttonActiveColor_Click);
+            this.buttonActiveColor.Click += new System.EventHandler(this.buttonColor_Click);
             // 
             // SettingsForm
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(235, 194);
+            this.ClientSize = new System.Drawing.Size(357, 263);
             this.Controls.Add(this.buttonActiveColor);
             this.Controls.Add(this.cancelButton);
             this.Controls.Add(this.okButton);
@@ -138,6 +141,6 @@
         private System.Windows.Forms.Button okButton;
         private System.Windows.Forms.Button cancelButton;
         private System.Windows.Forms.ColorDialog colorDialog;
-        private System.Windows.Forms.Button buttonActiveColor;
+        private ColorPickerButton buttonActiveColor;
     }
 }
